@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
 import "./App.css";
-import MountainList from "./MountainList";
-import MountainInfo from "./MountainInfo";
+import Routes from "./Routes";
 import Nav from "./Nav";
 
 import whistler from "./images/whistler.jpg";
@@ -52,24 +50,12 @@ class App extends Component {
 		]
 	};
 	render() {
-		const getMountain = props => {
-			let id = props.match.params.id;
-			let currentMountain = this.props.mountains.find(
-				mountain => mountain.id.toLowerCase() === id.toLowerCase()
-			);
-			return <MountainInfo {...props} mountain={currentMountain} />;
-		};
 		return (
 			<div>
 				<Nav mountains={this.props.mountains} />
-				<Switch>
-					<Route
-						exact
-						path="/mountains"
-						render={() => <MountainList mountains={this.props.mountains} />}
-					/>
-					<Route exact path="/mountains/:id" render={getMountain} />
-				</Switch>
+				<div className="container">
+					<Routes mountains={this.props.mountains} />
+				</div>
 			</div>
 		);
 	}
